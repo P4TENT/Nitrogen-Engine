@@ -39,7 +39,7 @@ add_subdirectory(thirdparty/imgui-docking)			#ui
 
 # MY_SOURCES is defined to be a list of all the source files for my game 
 # DON'T ADD THE SOURCES BY HAND, they are already added with this macro
-file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/core/*.cpp")
+file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 
 add_executable("${CMAKE_PROJECT_NAME}")
@@ -62,7 +62,7 @@ else()
 
 endif()
 
-target_sources("${CMAKE_PROJECT_NAME}" PRIVATE ${MY_SOURCES} "src/core/window.h" "src/core/window.cpp" "src/core/defs.h")
+target_sources("${CMAKE_PROJECT_NAME}" PRIVATE ${MY_SOURCES})
 
 
 if(MSVC) # If using the VS compiler...
@@ -84,6 +84,6 @@ target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURC
 
 #enet not working yet on linux for some reason
 target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE glm 
-	 stb_image stb_truetype imgui SDL2-static)
+	 stb_image stb_truetype imgui SDL2-static SDL2main)
 
 
