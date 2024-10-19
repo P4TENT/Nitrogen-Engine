@@ -3,7 +3,8 @@
 
 #include "info/window.h"
 
-#include "winGame.cpp"
+#include "../include/winGame.h"
+#undef main
 
 
 int main(int argc, char *argv[])
@@ -15,7 +16,7 @@ int main(int argc, char *argv[])
     }
 
     // Create the window
-    SDL_Window* window = SDL_CreateWindow("Chef-Madness", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+    SDL_Window* window = SDL_CreateWindow("Asteria", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
     if (!window) {
         printf("Error: Failed to open window\nSDL Error: '%s'\n", SDL_GetError());
         throw std::runtime_error("Failed to create window");
@@ -31,34 +32,22 @@ int main(int argc, char *argv[])
 
     // Main loop flag
     bool quit = false;
-
     // Event handler
     SDL_Event e;
 
+    init(renderer);
     // Main loop
     while (!quit) {
-        // Handle events on the queue
         while (SDL_PollEvent(&e) != 0) {
             // User requests quit
             if (e.type == SDL_QUIT) {
                 quit = true;
-            }
-
-            // Handle other events, like keyboard or mouse input
-            if (e.type == SDL_KEYDOWN) {
-                switch (e.key.keysym.sym) {
-                case SDLK_ESCAPE:
-                    quit = true;  // Quit when the Escape key is pressed
-                    break;
-                    // Handle other keys here
-                }
             }
         }
 
         update(renderer);
     }
 
-    // Clean up and close SDL
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
