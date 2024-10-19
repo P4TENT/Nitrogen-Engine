@@ -84,6 +84,6 @@ target_include_directories("${CMAKE_PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURC
 
 #enet not working yet on linux for some reason
 target_link_libraries("${CMAKE_PROJECT_NAME}" PRIVATE glm 
-	 stb_image stb_truetype imgui SDL2-static SDL2main)
+	 stb_image stb_truetype imgui SDL2-static)
 
 
